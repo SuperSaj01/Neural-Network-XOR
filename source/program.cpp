@@ -30,8 +30,8 @@ class Layer
 
 Layer::Layer(int numberOfNodeInputs, int nodesOutputs)
 {
-    x = numberOfNodeInputs;
-    y = nodesOutputs;
+    numberOfNodeInputs = numberOfNodeInputs;
+    nodesOutput = nodesOutputs;
 }
 
 class NeuralNetwork
