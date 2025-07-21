@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug main.exe",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/source",
+      "environment": [],
+      "externalConsole": true,
+      "preLaunchTask": "build program.cpp",  // ← this runs the build first,
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb", // You may need to set full path if gdb is not in PATH
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

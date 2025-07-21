@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build program.cpp",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-g",
+        "source/program.cpp",
+        "-o",
+        "build/main.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile C++ file with g++"
+    }
+  ]
+}
