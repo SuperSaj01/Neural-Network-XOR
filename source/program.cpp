@@ -13,6 +13,7 @@
 */
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 double sigmoid(double input)
 {
@@ -21,31 +22,47 @@ double sigmoid(double input)
 
 class Layer
 {
-    private:
-    int numberOfNodeInputs, nodesOutput;
+private:
     
-    public:
+    
+public:
     Layer(int numberOfNodeInputs, int nodesOutput);
     
 };
 
-Layer::Layer(int numberOfNodeInputs, int nodesOutputs)
+Layer::Layer(int numberOfNodeInputs, int nodesOutputs) : numberOfNodeInputs(numberOfNodeInputs), nodesOutput(nodesOutput)
 {
-    numberOfNodeInputs = numberOfNodeInputs;
-    nodesOutput = nodesOutputs;
+ 
 }
 
 class NeuralNetwork
 {
+private:
+    std::vector<int>  NumberOfNeuronsInEachLayer;
+    std::vector<std::vector<int>> weights;
+    std::vector<double> biases; 
 
+    void SetUpInputsAndOutputsNeurons();
+public:
+    NeuralNetwork(const std::vector<int>& NumberOfNeuronsInEachLayer);
 };
+
+NeuralNetwork::NeuralNetwork(const std::vector<int>& NumberOfNeuronsInEachLayer) : NumberOfNeuronsInEachLayer(NumberOfNeuronsInEachLayer)
+{
+
+}
+
+void NeuralNetwork::SetUpInputsAndOutputsNeurons()
+{
+
+}
 
 
 
 int main()
 {
-    
-    
+    std::vector<int> neuronList = { 2, 3, 1 };
+    NeuralNetwork nn(neuronList);
 }
 
 
