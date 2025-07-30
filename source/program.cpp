@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <random>
 
 double sigmoid(double input)
 {
@@ -23,46 +24,74 @@ double sigmoid(double input)
 class Layer
 {
 private:
-    
-    
+    int nodeInput;
+    int nodesOutput;
+    std::vector<std::vector<double>> weights;
+    std::vector<double> biases;
+    void InitialiseWeights();
 public:
-    Layer(int numberOfNodeInputs, int nodesOutput);
-    
+    Layer(int nodeInput, int nodesOutput);
+    void InitialiseWeightsAndBiases();
 };
 
-Layer::Layer(int numberOfNodeInputs, int nodesOutputs) : numberOfNodeInputs(numberOfNodeInputs), nodesOutput(nodesOutput)
+
+void Layer::InitialiseWeightsAndBiases()
 {
- 
+    biases.resize(nodesOutput, 0.0);
+
+    weights.resize(nodeInput, std::vector<double>(nodesOutput));
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::normal_distribution<> dist(0, std::sqrt(2.0 / nodeInput));
+
+    double randomNum = ((double)std::rand() / RAND_MAX);
+
+    for (int i = 0; i < nodeInput; i++)
+    {
+        for (int j = 0; j < nodesOutput; j++)
+        {
+            weights[i][j] = randomNum;
+        }
+    }    
+    
+}
+
+Layer::Layer(int nodeInput, int nodesOutput) : nodeInput(nodeInput), nodesOutput(nodesOutput)
+{
+    InitialiseWeightsAndBiases();
 }
 
 class NeuralNetwork
 {
 private:
     std::vector<int>  NumberOfNeuronsInEachLayer;
-    std::vector<std::vector<int>> weights;
-    std::vector<double> biases; 
+    std::vector<Layer> layers;
+    void SetUpLayers(std::vector<int> NumberOfNeuronsInEachLayer);
 
-    void SetUpInputsAndOutputsNeurons();
 public:
     NeuralNetwork(const std::vector<int>& NumberOfNeuronsInEachLayer);
 };
 
 NeuralNetwork::NeuralNetwork(const std::vector<int>& NumberOfNeuronsInEachLayer) : NumberOfNeuronsInEachLayer(NumberOfNeuronsInEachLayer)
 {
-
+    SetUpLayers(NumberOfNeuronsInEachLayer);
 }
 
-void NeuralNetwork::SetUpInputsAndOutputsNeurons()
+void NeuralNetwork::SetUpLayers(std::vector<int> NumberOfNeuronsInEachLayer)
 {
-
+    for (int i = 0; i < NumberOfNeuronsInEachLayer.size() - 1; i++)
+    {
+        layers.push_back(Layer(NumberOfNeuronsInEachLayer[i], NumberOfNeuronsInEachLayer[i + 1]));
+    }
 }
-
-
 
 int main()
 {
     std::vector<int> neuronList = { 2, 3, 1 };
+
     NeuralNetwork nn(neuronList);
+   
 }
 
 
